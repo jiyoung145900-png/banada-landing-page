@@ -446,15 +446,10 @@
     </div>
 
     <!-- ============================================= -->
-    <!-- 📧 폼 이메일 수신 설정                          -->
-    <!-- 1) https://formspree.io 무료 가입              -->
-    <!-- 2) New Form 만들고 폼 ID 복사                  -->
-    <!-- 3) 아래 action의 YOUR_FORM_ID를 발급받은 걸로 교체 -->
-    <!-- 이렇게 하면 상담 신청이 가입한 이메일로 옵니다      -->
+    <!-- 💬 폼 제출 → SalesSmartly 채팅창 자동 오픈       -->
+    <!-- 상담 정보가 매니저에게 자동으로 전송됩니다        -->
     <!-- ============================================= -->
-    <form class="form-card fade-up" id="consultForm"
-          action="https://formspree.io/f/YOUR_FORM_ID"
-          method="POST">
+    <form class="form-card fade-up" id="consultForm">
       <div class="form-title">Inquiry</div>
       <p class="form-note-top">3분이면 충분합니다. 아래 정보는 담당 매니저 외에 절대 공유되지 않습니다.</p>
 
@@ -539,29 +534,51 @@
   }, { threshold: 0.15 });
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
-  // 폼 제출 - Formspree ID를 아직 안 넣었으면 알림창만 뜸
+  // 폼 제출 → SalesSmartly 채팅창 오픈 + 상담 정보 자동 전송
   document.getElementById('consultForm').addEventListener('submit', function(e){
-    const action = this.getAttribute('action');
-    if (action.includes('YOUR_FORM_ID')) {
-      e.preventDefault();
-      alert('⚠️ 이메일 수신 설정이 아직 안 되어 있어요.\n\nformspree.io 가입 후 발급받은 폼 ID를 index.html의 YOUR_FORM_ID 자리에 넣어주세요.\n\n(테스트: 상담 신청이 접수되었다고 가정합니다)');
-      return;
-    }
-    // Formspree 정상 연동 후 아래 코드가 실행됨 (fetch로 페이지 이동 없이 전송)
     e.preventDefault();
-    const form = this;
-    fetch(action, {
-      method: 'POST',
-      body: new FormData(form),
-      headers: { 'Accept': 'application/json' }
-    }).then(res => {
-      if (res.ok) {
-        alert('상담 신청이 접수되었습니다. 담당 매니저가 조용히 연락드리겠습니다.\n\n실시간 상담은 우측 하단 채팅 아이콘을 눌러주세요.');
-        form.reset();
-      } else {
-        alert('전송 중 문제가 발생했어요. 잠시 후 다시 시도해 주세요.');
-      }
-    }).catch(() => alert('네트워크 오류. 잠시 후 다시 시도해 주세요.'));
+
+    // 폼 데이터 수집
+    const name    = document.getElementById('name').value.trim();
+    const phone   = document.getElementById('phone').value.trim();
+    const age     = document.getElementById('age').value;
+    const tier    = document.getElementById('tier').value;
+    const message = document.getElementById('message').value.trim();
+
+    // 멤버십 한글 라벨 매핑
+    const tierLabels = {
+      gold: 'Gold (골드)',
+      vip: 'VIP',
+      platinum: 'Platinum (플래티넘)',
+      diamond: 'Diamond (다이아몬드)',
+      undecided: '상담 후 결정'
+    };
+    const ageLabels = {
+      '20s': '20대', '30s': '30대', '40s': '40대', '50s': '50대', '60s+': '60대 이상'
+    };
+
+    // 매니저에게 보낼 메시지 포맷팅
+    const summary =
+      '━━ 상담 신청 ━━\n' +
+      '성함: ' + name + '\n' +
+      '연락처: ' + phone + '\n' +
+      '연령대: ' + (ageLabels[age] || age) + '\n' +
+      '관심 멤버십: ' + (tierLabels[tier] || tier) +
+      (message ? '\n선호사항: ' + message : '') +
+      '\n━━━━━━━━━━━';
+
+    // SalesSmartly 채팅창 열기 + 자동 메시지 전송
+    if (window.ssq) {
+      window.ssq.push('chatOpen');
+      // 약간의 지연 후 메시지 전송 (채팅창 준비 시간)
+      setTimeout(function(){
+        window.ssq.push('sendTextMessage', summary);
+      }, 800);
+      this.reset();
+    } else {
+      // SalesSmartly 로딩 실패 시 안내
+      alert('채팅 위젯이 아직 로딩 중입니다. 우측 하단 채팅 아이콘을 눌러 직접 상담을 시작해 주세요.');
+    }
   });
 </script>
 

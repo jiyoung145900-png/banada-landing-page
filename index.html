@@ -4,494 +4,308 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>BANADA — 당신에게 어울리는 인연</title>
-<meta name="description" content="BANADA는 25세부터 65세 이상까지, 좋은 인연을 원하는 남성 회원분들을 위한 프라이빗 매칭 서비스입니다.">
+<meta name="description" content="소수의 남성 회원만을 위한 프라이빗 매칭 서비스. 정성껏 큐레이션된 인연을 조용하고 확실하게 연결해 드립니다.">
 <link rel="icon" type="image/png" href="logo.png">
 <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Cinzel:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --bg:#0A0605;
-    --bg-2:#140C09;
-    --bg-3:#1E120E;
-    --wine:#3A1119;
-    --gold:#C99569;
-    --gold-bright:#E4B689;
-    --gold-dim:#8A6544;
-    --ruby:#A53D4F;
-    --ruby-glow:#C74B60;
-    --cream:#EFE1CB;
-    --cream-dim:#B8A98F;
-    --hairline:rgba(201,149,105,0.25);
+  :root {
+    --bg: #0A0605;
+    --bg-2: #140C09;
+    --bg-3: #1E120E;
+    --wine: #3A1119;
+    --gold: #C99569;
+    --gold-bright: #E4B689;
+    --gold-dim: #8A6544;
+    --ruby: #A53D4F;
+    --ruby-glow: #C74B60;
+    --cream: #EFE1CB;
+    --cream-dim: #B8A98F;
+    --hairline: rgba(201,149,105,0.25);
   }
-  *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
-  body{
-    font-family:'Pretendard','Pretendard Variable',-apple-system,sans-serif;
-    background:var(--bg);
-    color:var(--cream);
-    line-height:1.55;
-    overflow-x:hidden;
-    -webkit-font-smoothing:antialiased;
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Pretendard', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--cream);
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
   }
-  body::before{
-    content:'';position:fixed;inset:0;
-    background-image:radial-gradient(rgba(201,149,105,0.03) 1px,transparent 1px);
-    background-size:3px 3px;
-    pointer-events:none;z-index:1;
-    opacity:0.6;
+  ::selection { background: var(--gold-dim); color: var(--bg); }
+
+  body::after {
+    content: ''; position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.03; pointer-events: none; z-index: 9999;
   }
 
-  nav{
-    position:fixed;top:0;left:0;right:0;z-index:100;
-    display:flex;justify-content:space-between;align-items:center;
-    padding:20px 48px;
-    background:rgba(10,6,5,0.75);
-    backdrop-filter:blur(16px);
-    border-bottom:1px solid var(--hairline);
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 16px 48px;
+    background: linear-gradient(to bottom, rgba(10,6,5,0.9), rgba(10,6,5,0));
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
   }
-  .logo-wrap{display:flex;align-items:center;gap:12px}
-  .logo-wrap img{height:44px;width:auto;display:block}
-  .nav-links{display:flex;gap:36px;align-items:center}
-  .nav-links a{
-    color:var(--cream-dim);text-decoration:none;
-    font-size:13px;font-weight:500;letter-spacing:0.08em;
-    text-transform:uppercase;
-    transition:color .2s;
+  nav.scrolled {
+    background: rgba(10,6,5,0.85);
+    border-bottom: 1px solid var(--hairline);
+    padding: 12px 48px;
   }
-  .nav-links a:hover{color:var(--gold-bright)}
-  .nav-cta{
-    color:var(--bg) !important;
-    background:linear-gradient(135deg,var(--gold-bright),var(--gold));
-    padding:10px 22px;
-    font-size:12px !important;font-weight:600 !important;
-    letter-spacing:0.12em !important;
-    border:none;
-    transition:transform .2s;
+  .logo-wrap img { height: 40px; width: auto; display: block; filter: drop-shadow(0 2px 10px rgba(0,0,0,0.5)); }
+  .nav-links { display: flex; gap: 32px; align-items: center; }
+  .nav-links a {
+    color: var(--cream-dim); text-decoration: none;
+    font-size: 13px; font-weight: 500; letter-spacing: 0.08em;
+    text-transform: uppercase; transition: color .2s;
   }
-  .nav-cta:hover{transform:translateY(-1px);color:var(--bg) !important}
+  .nav-links a:hover { color: var(--gold-bright); }
+  .nav-cta {
+    color: var(--bg) !important;
+    background: linear-gradient(135deg, var(--gold-bright), var(--gold));
+    padding: 10px 24px; border-radius: 2px;
+    font-size: 12px !important; font-weight: 600 !important;
+    transition: transform .2s, box-shadow .2s;
+  }
+  .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(201,149,105,0.3); }
 
-  .hero{
-    position:relative;
-    min-height:100vh;
-    padding:140px 48px 100px;
-    display:flex;flex-direction:column;justify-content:center;align-items:center;
-    text-align:center;
-    background:
-      radial-gradient(ellipse at 20% 20%, rgba(165,61,79,0.15), transparent 50%),
-      radial-gradient(ellipse at 80% 80%, rgba(201,149,105,0.12), transparent 50%),
-      var(--bg);
-    overflow:hidden;
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    text-align: center; padding: 140px 24px 100px;
   }
-  .hero-gem{
-    position:absolute;
-    top:50%;left:50%;
-    transform:translate(-50%,-50%);
-    width:min(80vh,900px);
-    height:min(80vh,900px);
-    opacity:0.08;
-    pointer-events:none;
-    z-index:1;
+  
+  /* 📷 hero.jpg 파일을 index.html 옆에 두시면 됩니다 */
+  .hero-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background-image: url('hero.jpg');
+    background-size: cover; background-position: center;
+    background-color: var(--bg-3);
   }
-  .hero-inner{position:relative;z-index:2;max-width:900px}
-
-  .eyebrow{
-    display:inline-flex;align-items:center;gap:16px;
-    font-family:'Cinzel',serif;
-    font-size:11px;font-weight:500;
-    letter-spacing:0.4em;
-    color:var(--gold);
-    margin-bottom:32px;
-    text-transform:uppercase;
-  }
-  .eyebrow::before,.eyebrow::after{
-    content:'';width:32px;height:1px;background:var(--gold-dim);
+  .hero-overlay {
+    position: absolute; inset: 0; z-index: 1;
+    background: linear-gradient(to bottom, rgba(10,6,5,0.3) 0%, rgba(10,6,5,0.8) 70%, rgba(10,6,5,1) 100%);
   }
 
-  h1{
-    font-family:'Cormorant Garamond',serif;
-    font-size:clamp(52px,7vw,104px);
-    font-weight:400;
-    line-height:1.02;
-    letter-spacing:-0.015em;
-    color:var(--cream);
-    margin-bottom:32px;
+  .hero-inner { position: relative; z-index: 2; max-width: 900px; }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 16px;
+    font-family: 'Cinzel', serif; font-size: 11px; font-weight: 500;
+    letter-spacing: 0.4em; color: var(--gold);
+    margin-bottom: 24px; text-transform: uppercase;
   }
-  h1 em{
-    font-style:italic;
-    background:linear-gradient(135deg,var(--gold-bright),var(--ruby-glow) 60%,var(--gold));
-    -webkit-background-clip:text;
-    background-clip:text;
-    -webkit-text-fill-color:transparent;
-    font-weight:500;
+  .eyebrow::before, .eyebrow::after { content: ''; width: 32px; height: 1px; background: var(--gold-dim); }
+  
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(42px, 6vw, 92px); font-weight: 300;
+    line-height: 1.1; letter-spacing: -0.01em;
+    color: var(--cream); margin-bottom: 32px;
   }
-
-  .hero-sub{
-    font-size:16px;color:var(--cream-dim);
-    max-width:520px;margin:0 auto 48px;
-    line-height:1.7;
-    letter-spacing:0.02em;
+  h1 em {
+    font-style: italic; font-weight: 500;
+    background: linear-gradient(135deg, var(--gold-bright), var(--ruby-glow), var(--gold));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
   }
-
-  .hero-ctas{display:flex;gap:20px;justify-content:center;flex-wrap:wrap}
-  .btn-primary{
-    background:linear-gradient(135deg,var(--gold-bright),var(--gold));
-    color:var(--bg);
-    padding:16px 40px;
-    font-family:'Cinzel',serif;
-    font-weight:500;font-size:13px;
-    letter-spacing:0.2em;
-    text-transform:uppercase;
-    text-decoration:none;
-    display:inline-flex;align-items:center;gap:12px;
-    transition:all .3s;
-    position:relative;
-    overflow:hidden;
-  }
-  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(201,149,105,0.3)}
-
-  .btn-ghost{
-    color:var(--cream);
-    padding:16px 32px;
-    font-family:'Cinzel',serif;
-    font-weight:500;font-size:13px;
-    letter-spacing:0.2em;
-    text-transform:uppercase;
-    text-decoration:none;
-    border:1px solid var(--hairline);
-    transition:all .3s;
-    display:inline-flex;align-items:center;gap:12px;
-  }
-  .btn-ghost:hover{border-color:var(--gold);color:var(--gold-bright)}
-
-  section{padding:140px 48px;position:relative;z-index:2}
-  .section-eyebrow{
-    display:flex;align-items:center;gap:16px;
-    font-family:'Cinzel',serif;
-    font-size:11px;font-weight:500;
-    letter-spacing:0.4em;
-    color:var(--gold);
-    margin-bottom:32px;
-    text-transform:uppercase;
-  }
-  .section-eyebrow::before{
-    content:'';width:32px;height:1px;background:var(--gold);
-  }
-  h2{
-    font-family:'Cormorant Garamond',serif;
-    font-size:clamp(40px,5vw,68px);
-    font-weight:400;
-    letter-spacing:-0.015em;
-    line-height:1.1;
-    margin-bottom:32px;
-    color:var(--cream);
-    max-width:760px;
-  }
-  h2 em{
-    font-style:italic;
-    color:var(--gold-bright);
+  .hero-sub {
+    font-size: 17px; color: var(--cream-dim); font-weight: 300;
+    max-width: 540px; margin: 0 auto 48px; line-height: 1.7; word-break: keep-all;
   }
 
-  .philosophy{
-    background:linear-gradient(180deg,var(--bg),var(--bg-2));
-    text-align:center;
+  .btn-primary {
+    background: linear-gradient(135deg, var(--gold-bright), var(--gold));
+    color: var(--bg); padding: 18px 48px; border-radius: 2px;
+    font-family: 'Cinzel', serif; font-weight: 600; font-size: 13px;
+    letter-spacing: 0.2em; text-transform: uppercase; text-decoration: none;
+    display: inline-flex; align-items: center; transition: all .3s;
   }
-  .philosophy .section-eyebrow{justify-content:center}
-  .philosophy .section-eyebrow::before{display:none}
-  .philosophy .section-eyebrow::after{
-    content:'';width:32px;height:1px;background:var(--gold);
+  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(201,149,105,0.4); }
+
+  .fade-up { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  .philosophy { padding: 160px 48px; background: var(--bg); }
+  .phil-container {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
   }
-  .philosophy h2{margin:0 auto 32px}
-  .philosophy-quote{
-    font-family:'Cormorant Garamond',serif;
-    font-style:italic;
-    font-size:22px;
-    color:var(--cream-dim);
-    max-width:640px;margin:0 auto;
-    line-height:1.7;
+  
+  /* 📷 philosophy.jpg 파일을 index.html 옆에 두시면 됩니다 */
+  .phil-image {
+    position: relative; width: 100%; aspect-ratio: 3/4; overflow: hidden;
+    background: var(--bg-3);
+  }
+  .phil-image img {
+    width: 100%; height: 100%; object-fit: cover;
+    filter: brightness(0.85) contrast(1.1); transition: transform 0.7s;
+  }
+  .phil-image:hover img { transform: scale(1.03); filter: brightness(1); }
+  .phil-image::after {
+    content: ''; position: absolute; inset: 0;
+    border: 1px solid var(--hairline); margin: 16px; pointer-events: none;
   }
 
-  .pillars{
-    background:var(--bg);
-    max-width:1280px;margin:0 auto;
+  .phil-text h2 {
+    font-family: 'Cormorant Garamond', serif; font-size: clamp(36px, 4vw, 56px);
+    font-weight: 400; line-height: 1.2; color: var(--cream); margin-bottom: 32px;
   }
-  .pillars-grid{
-    display:grid;grid-template-columns:repeat(3,1fr);
-    gap:0;
-    margin-top:80px;
-    border-top:1px solid var(--hairline);
-  }
-  .pillar{
-    padding:48px 32px;
-    border-right:1px solid var(--hairline);
-    border-bottom:1px solid var(--hairline);
-    position:relative;
-    transition:background .4s;
-  }
-  .pillar:nth-child(3){border-right:none}
-  .pillar:hover{background:var(--bg-2)}
-  .pillar-num{
-    font-family:'Cinzel',serif;
-    font-size:13px;
-    letter-spacing:0.3em;
-    color:var(--gold);
-    margin-bottom:32px;
-  }
-  .pillar h3{
-    font-family:'Cormorant Garamond',serif;
-    font-size:32px;font-weight:500;
-    color:var(--cream);
-    margin-bottom:16px;
-    line-height:1.2;
-  }
-  .pillar p{
-    font-size:14px;color:var(--cream-dim);
-    line-height:1.7;
+  .phil-text h2 em { font-style: italic; color: var(--gold-bright); }
+  .phil-quote {
+    font-size: 16px; color: var(--cream-dim); line-height: 1.8;
+    margin-bottom: 24px; font-weight: 300; word-break: keep-all;
   }
 
-  .membership{
-    background:
-      radial-gradient(ellipse at center top,rgba(165,61,79,0.12),transparent 60%),
-      var(--bg-3);
-    text-align:center;
+  .pillars { padding: 0 48px 160px; background: var(--bg); max-width: 1200px; margin: 0 auto; }
+  .pillars-header { text-align: center; margin-bottom: 80px; }
+  .pillars-header h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px, 4vw, 56px); margin: 20px 0 0; }
+  
+  .pillars-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+    background: var(--hairline); border: 1px solid var(--hairline);
   }
-  .membership .section-eyebrow{justify-content:center}
-  .membership .section-eyebrow::before{display:none}
-  .membership .section-eyebrow::after{
-    content:'';width:32px;height:1px;background:var(--gold);
+  .pillar { background: var(--bg); padding: 56px 40px; text-align: center; transition: background .4s; }
+  .pillar:hover { background: var(--bg-2); }
+  .pillar-num {
+    font-family: 'Cinzel', serif; font-size: 14px; letter-spacing: 0.3em;
+    color: var(--ruby-glow); margin-bottom: 24px;
   }
-  .membership h2{margin:0 auto 32px}
-  .membership-sub{
-    font-size:16px;color:var(--cream-dim);
-    max-width:560px;margin:0 auto 80px;
-    line-height:1.7;
-  }
-  .tiers{
-    display:grid;grid-template-columns:repeat(3,1fr);
-    gap:24px;
-    max-width:1100px;margin:0 auto;
-  }
-  .tier{
-    background:var(--bg);
-    border:1px solid var(--hairline);
-    padding:48px 32px;
-    text-align:left;
-    position:relative;
-    transition:all .4s;
-  }
-  .tier:hover{
-    border-color:var(--gold);
-    transform:translateY(-8px);
-  }
-  .tier.featured{
-    background:linear-gradient(180deg,var(--bg-3),var(--bg));
-    border-color:var(--gold);
-  }
-  .tier.featured::before{
-    content:'Signature';
-    position:absolute;top:-1px;right:32px;
-    background:linear-gradient(135deg,var(--gold-bright),var(--gold));
-    color:var(--bg);
-    padding:6px 16px;
-    font-family:'Cinzel',serif;
-    font-size:10px;font-weight:600;
-    letter-spacing:0.2em;
-    text-transform:uppercase;
-  }
-  .tier-name{
-    font-family:'Cormorant Garamond',serif;
-    font-size:36px;font-weight:500;
-    color:var(--gold-bright);
-    margin-bottom:8px;
-    letter-spacing:0.02em;
-  }
-  .tier-desc{
-    font-size:13px;color:var(--cream-dim);
-    margin-bottom:32px;
-    padding-bottom:24px;
-    border-bottom:1px solid var(--hairline);
-  }
-  .tier ul{list-style:none}
-  .tier li{
-    padding:10px 0;font-size:14px;
-    color:var(--cream);
-    display:flex;align-items:flex-start;gap:12px;
-  }
-  .tier li::before{
-    content:'';display:block;flex-shrink:0;
-    width:6px;height:6px;
-    background:var(--gold);
-    border-radius:50%;
-    margin-top:8px;
-  }
+  .pillar h3 { font-family: 'Cormorant Garamond', serif; font-size: 30px; font-weight: 500; color: var(--gold-bright); margin-bottom: 16px; }
+  .pillar p { font-size: 15px; color: var(--cream-dim); line-height: 1.7; word-break: keep-all; }
 
-  .consult{
-    background:var(--bg);
-    padding:140px 48px;
+  .membership { padding: 140px 48px; background: linear-gradient(180deg, var(--bg-2), var(--bg)); text-align: center; }
+  .membership h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px, 4vw, 56px); margin: 20px auto 24px; }
+  .membership-sub { font-size: 16px; color: var(--cream-dim); max-width: 560px; margin: 0 auto 80px; }
+  
+  /* 4단계 멤버십 그리드 */
+  .tiers { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; max-width: 1280px; margin: 0 auto; }
+  .tier {
+    background: var(--bg); border: 1px solid var(--hairline);
+    padding: 44px 28px; text-align: left; position: relative; transition: all .4s;
   }
-  .consult-wrap{
-    max-width:1200px;margin:0 auto;
-    display:grid;grid-template-columns:1fr 1fr;
-    gap:100px;
-    align-items:center;
+  .tier:hover { border-color: var(--gold); transform: translateY(-8px); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+  .tier.featured { background: linear-gradient(180deg, var(--bg-3), var(--bg)); border-color: var(--gold); }
+  .tier.featured::before {
+    content: 'Most Popular'; position: absolute; top: -1px; right: 24px;
+    background: linear-gradient(135deg, var(--gold-bright), var(--gold));
+    color: var(--bg); padding: 6px 14px;
+    font-family: 'Cinzel', serif; font-size: 10px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
   }
-  .consult-info h2{margin-bottom:32px}
-  .consult-lead{
-    font-family:'Cormorant Garamond',serif;
-    font-style:italic;
-    font-size:22px;
-    color:var(--cream-dim);
-    margin-bottom:48px;
-    line-height:1.6;
-  }
-  .consult-details{
-    list-style:none;
-    border-top:1px solid var(--hairline);
-  }
-  .consult-details li{
-    padding:20px 0;
-    border-bottom:1px solid var(--hairline);
-    display:flex;justify-content:space-between;
-    font-size:14px;
-  }
-  .consult-details .label{
-    color:var(--gold);
-    font-family:'Cinzel',serif;
-    font-size:11px;letter-spacing:0.2em;
-    text-transform:uppercase;
-  }
-  .consult-details .value{color:var(--cream)}
+  .tier-name { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 500; color: var(--gold-bright); margin-bottom: 8px; }
+  .tier-desc { font-size: 13px; color: var(--cream-dim); margin-bottom: 28px; padding-bottom: 20px; border-bottom: 1px solid var(--hairline); }
+  .tier ul { list-style: none; }
+  .tier li { padding: 8px 0; font-size: 14px; color: var(--cream); display: flex; align-items: flex-start; gap: 10px; line-height: 1.5; }
+  .tier li::before { content: '✦'; color: var(--ruby-glow); font-size: 11px; margin-top: 3px; flex-shrink: 0; }
 
-  .form-card{
-    background:var(--bg-2);
-    border:1px solid var(--hairline);
-    padding:48px;
-    position:relative;
+  .consult { padding: 160px 48px; background: var(--bg); }
+  .consult-wrap {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
   }
-  .form-card::before{
-    content:'';position:absolute;
-    top:-1px;left:-1px;right:-1px;height:1px;
-    background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  
+  /* 📷 consult.jpg 파일을 index.html 옆에 두시면 됩니다 */
+  .consult-image-wrap { position: relative; width: 100%; aspect-ratio: 4/5; background: var(--bg-3); }
+  .consult-image-wrap img { width: 100%; height: 100%; object-fit: cover; filter: sepia(0.2) brightness(0.8); }
+  .consult-info-box {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: rgba(10,6,5,0.85); backdrop-filter: blur(5px);
+    padding: 32px; border-top: 1px solid var(--gold-dim);
   }
-  .form-title{
-    font-family:'Cormorant Garamond',serif;
-    font-size:28px;font-weight:500;
-    color:var(--cream);
-    margin-bottom:8px;
-  }
-  .form-note-top{
-    font-size:13px;color:var(--cream-dim);
-    margin-bottom:32px;
-    padding-bottom:24px;
-    border-bottom:1px solid var(--hairline);
-  }
-  .form-row{margin-bottom:24px}
-  .form-row label{
-    display:block;
-    font-family:'Cinzel',serif;
-    font-size:10px;font-weight:500;
-    letter-spacing:0.25em;
-    color:var(--gold);
-    margin-bottom:10px;
-    text-transform:uppercase;
-  }
-  .form-row input,.form-row select,.form-row textarea{
-    width:100%;
-    padding:14px 0;
-    border:none;
-    border-bottom:1px solid var(--hairline);
-    font-family:'Pretendard',sans-serif;
-    font-size:15px;
-    background:transparent;
-    color:var(--cream);
-    transition:border-color .2s;
-  }
-  .form-row input:focus,.form-row select:focus,.form-row textarea:focus{
-    outline:none;
-    border-bottom-color:var(--gold);
-  }
-  .form-row input::placeholder,.form-row textarea::placeholder{color:rgba(184,169,143,0.4)}
-  .form-row select{
-    appearance:none;
-    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path d='M1 1l4 4 4-4' stroke='%23C99569' stroke-width='1.5' fill='none'/></svg>");
-    background-repeat:no-repeat;
-    background-position:right center;
-    cursor:pointer;
-  }
-  .form-row select option{background:var(--bg-2);color:var(--cream)}
-  .form-row textarea{min-height:80px;resize:vertical;font-family:'Pretendard',sans-serif}
+  .consult-info-box h3 { font-family: 'Cormorant Garamond', serif; font-size: 24px; color: var(--gold-bright); margin-bottom: 12px; }
+  .consult-info-box p { font-size: 14px; color: var(--cream-dim); margin-bottom: 8px; }
 
-  .form-submit{
-    width:100%;
-    background:linear-gradient(135deg,var(--gold-bright),var(--gold));
-    color:var(--bg);
-    padding:18px;
-    border:none;
-    font-family:'Cinzel',serif;
-    font-weight:600;font-size:13px;
-    letter-spacing:0.25em;
-    text-transform:uppercase;
-    cursor:pointer;
-    transition:all .3s;
-    margin-top:16px;
+  .form-card { background: var(--bg-2); border: 1px solid var(--hairline); padding: 56px 48px; position: relative; }
+  .form-card::before {
+    content: ''; position: absolute; top: -1px; left: -1px; right: -1px; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
   }
-  .form-submit:hover{
-    background:linear-gradient(135deg,var(--ruby-glow),var(--gold));
-    transform:translateY(-2px);
+  .form-title { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 500; color: var(--cream); margin-bottom: 8px; }
+  .form-note-top { font-size: 14px; color: var(--cream-dim); margin-bottom: 40px; padding-bottom: 24px; border-bottom: 1px solid var(--hairline); }
+  
+  .form-row { margin-bottom: 28px; }
+  .form-row label {
+    display: block; font-family: 'Cinzel', serif; font-size: 11px; font-weight: 500;
+    letter-spacing: 0.25em; color: var(--gold); margin-bottom: 12px; text-transform: uppercase;
   }
-  .form-note{
-    font-size:11px;
-    color:var(--cream-dim);
-    text-align:center;
-    margin-top:20px;
-    letter-spacing:0.05em;
+  .form-row input, .form-row select, .form-row textarea {
+    width: 100%; padding: 14px 0; border: none; border-bottom: 1px solid var(--hairline);
+    font-family: 'Pretendard', sans-serif; font-size: 16px; background: transparent; color: var(--cream); transition: border-color .3s;
   }
+  .form-row input:focus, .form-row select:focus, .form-row textarea:focus { outline: none; border-bottom-color: var(--gold-bright); }
+  .form-row input::placeholder, .form-row textarea::placeholder { color: rgba(184,169,143,0.3); }
+  .form-row select {
+    appearance: none; cursor: pointer;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path d='M1 1l4 4 4-4' stroke='%23C99569' stroke-width='1.5' fill='none'/></svg>");
+    background-repeat: no-repeat; background-position: right center;
+  }
+  .form-row select option { background: var(--bg-2); color: var(--cream); }
+  .form-row textarea { min-height: 100px; resize: vertical; }
 
-  footer{
-    background:var(--bg-2);
-    padding:64px 48px 32px;
-    text-align:center;
-    border-top:1px solid var(--hairline);
+  .form-consent {
+    display: flex; align-items: flex-start; gap: 10px;
+    font-size: 13px; color: var(--cream-dim);
+    margin: 20px 0 8px; cursor: pointer; user-select: none;
   }
-  footer img{height:56px;margin-bottom:24px;opacity:0.9}
-  .footer-tag{
-    font-family:'Cormorant Garamond',serif;
-    font-style:italic;
-    font-size:16px;
-    color:var(--cream-dim);
-    margin-bottom:40px;
-  }
-  .footer-line{
-    width:80px;height:1px;
-    background:var(--gold-dim);
-    margin:0 auto 32px;
-  }
-  footer p{
-    font-family:'Cinzel',serif;
-    font-size:11px;
-    letter-spacing:0.2em;
-    color:var(--cream-dim);
-    opacity:0.7;
-  }
+  .form-consent input { width: auto; margin-top: 3px; accent-color: var(--gold); }
+  .form-consent a { color: var(--gold); text-decoration: underline; }
 
-  @media(max-width:900px){
-    nav{padding:16px 24px}
-    .logo-wrap img{height:36px}
-    .nav-links{gap:16px}
-    .nav-links a:not(.nav-cta){display:none}
-    .hero{padding:120px 24px 80px}
-    section{padding:80px 24px}
-    .pillars-grid{grid-template-columns:1fr;border-top:none}
-    .pillar{border-right:none;padding:40px 24px}
-    .tiers{grid-template-columns:1fr;gap:16px}
-    .consult{padding:80px 24px}
-    .consult-wrap{grid-template-columns:1fr;gap:60px}
-    .form-card{padding:32px 24px}
+  .form-submit {
+    width: 100%; background: linear-gradient(135deg, var(--gold-bright), var(--gold)); color: var(--bg);
+    padding: 20px; border: none; border-radius: 2px;
+    font-family: 'Cinzel', serif; font-weight: 600; font-size: 14px; letter-spacing: 0.25em; text-transform: uppercase;
+    cursor: pointer; transition: all .3s; margin-top: 16px;
+  }
+  .form-submit:hover { background: linear-gradient(135deg, var(--ruby-glow), var(--gold)); transform: translateY(-2px); box-shadow: 0 5px 20px rgba(201,149,105,0.3); }
+  .form-note { font-size: 12px; color: var(--cream-dim); text-align: center; margin-top: 20px; letter-spacing: 0.05em; }
+
+  footer { background: var(--bg-3); padding: 80px 48px 40px; text-align: center; border-top: 1px solid var(--hairline); }
+  footer img { height: 60px; margin-bottom: 24px; opacity: 0.9; }
+  .footer-tag { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 18px; color: var(--cream-dim); margin-bottom: 32px; }
+  .footer-line { width: 80px; height: 1px; background: var(--gold-dim); margin: 0 auto 24px; }
+  .footer-links { display: flex; justify-content: center; gap: 32px; margin-bottom: 24px; flex-wrap: wrap; }
+  .footer-links a {
+    color: var(--cream-dim); text-decoration: none;
+    font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+    transition: color .2s;
+  }
+  .footer-links a:hover { color: var(--gold-bright); }
+  footer p { font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.2em; color: var(--cream-dim); opacity: 0.5; }
+
+  @media(max-width: 1100px){
+    .tiers { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media(max-width: 900px){
+    nav { padding: 16px 24px; }
+    nav.scrolled { padding: 12px 24px; }
+    .logo-wrap img { height: 32px; }
+    .nav-links { gap: 16px; }
+    .nav-links a:not(.nav-cta) { display: none; }
+    
+    .hero { padding: 140px 24px 80px; }
+    h1 { font-size: 42px; }
+    .hero-sub { font-size: 15px; }
+    .btn-primary { width: 100%; justify-content: center; }
+
+    .philosophy, .pillars, .membership, .consult { padding: 80px 24px; }
+    
+    .phil-container, .consult-wrap { grid-template-columns: 1fr; gap: 48px; }
+    .phil-image { order: -1; aspect-ratio: 4/3; }
+    
+    .pillars-grid { grid-template-columns: 1fr; }
+    .pillar { border-bottom: 1px solid var(--hairline); padding: 48px 24px; }
+    
+    .tiers { grid-template-columns: 1fr; gap: 16px; }
+    
+    .form-card { padding: 40px 24px; }
+    .footer-links { gap: 20px; }
   }
 </style>
 </head>
 <body>
 
-<nav>
+<nav id="navbar">
   <div class="logo-wrap">
     <img src="logo.png" alt="BANADA">
   </div>
@@ -503,115 +317,117 @@
   </div>
 </nav>
 
-<section class="hero">
-  <svg class="hero-gem" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <linearGradient id="gemGrad" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0%" stop-color="#E4B689"/>
-        <stop offset="50%" stop-color="#A53D4F"/>
-        <stop offset="100%" stop-color="#8A6544"/>
-      </linearGradient>
-    </defs>
-    <path d="M200 60 L280 150 L200 340 L120 150 Z" fill="none" stroke="url(#gemGrad)" stroke-width="0.5"/>
-    <path d="M200 60 L200 340 M120 150 L280 150" stroke="url(#gemGrad)" stroke-width="0.3"/>
-    <path d="M200 60 L160 200 L200 340 L240 200 Z" fill="none" stroke="url(#gemGrad)" stroke-width="0.3"/>
-  </svg>
+<header class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
 
-  <div class="hero-inner">
-    <div class="eyebrow">Private Matchmaking · Since 2026</div>
+  <div class="hero-inner fade-up">
+    <div class="eyebrow">Private Matchmaking · Est. 2026</div>
     <h1>
       아무나 만나기엔<br>
-      당신의 <em>인연이</em><br>
-      너무 소중합니다.
+      당신의 <em>시간이</em><br>
+      너무 귀합니다.
     </h1>
     <p class="hero-sub">
-      20대부터 60대까지 —<br>
-      좋은 인연을 원하는 남성 회원분들을 위한 프라이빗 매칭 서비스.<br>
-      각자의 삶의 결에 어울리는 사람을, 조용하고 확실하게 연결해 드립니다.
+      BANADA는 소수의 남성 회원만을 위한 프라이빗 매칭 서비스입니다.<br>
+      정성껏 큐레이션된 인연을, 조용하고 확실하게 연결해 드립니다.
     </p>
-    <div class="hero-ctas">
-      <a href="#consult" class="btn-primary">
-        <span>Reserve Consultation</span>
-      </a>
-      <a href="#membership" class="btn-ghost">Membership →</a>
+    <div style="margin-top: 40px;">
+      <a href="#consult" class="btn-primary">Reserve Consultation</a>
+    </div>
+  </div>
+</header>
+
+<section class="philosophy" id="philosophy">
+  <div class="phil-container">
+    <div class="phil-text fade-up">
+      <div class="eyebrow" style="margin-bottom: 16px;">Our Philosophy</div>
+      <h2>좋은 만남은<br><em>우연이 아니라 안목입니다.</em></h2>
+      <p class="phil-quote">
+        "단순히 나이나 숫자로 매칭하지 않습니다.<br>
+        한 분 한 분의 취향, 라이프스타일, 그리고 삶의 온도를 읽어 
+        그에 가장 잘 어울리는 분을 정성껏 찾아드립니다."
+      </p>
+      <p class="phil-quote">
+        바쁜 일상 속, 당신의 시간을 의미 있는 만남으로 채워드리겠습니다.
+      </p>
+    </div>
+    
+    <div class="phil-image fade-up">
+      <img src="philosophy.jpg" alt="Atmosphere" loading="lazy">
     </div>
   </div>
 </section>
 
-<section class="philosophy" id="philosophy">
-  <div class="section-eyebrow">Our Philosophy</div>
-  <h2 style="text-align:center;margin-left:auto;margin-right:auto;">
-    좋은 만남은<br>
-    <em>우연이 아니라 안목입니다.</em>
-  </h2>
-  <p class="philosophy-quote">
-    "20대의 설렘도, 60대의 여유도<br>
-    각자에게 어울리는 결이 있습니다.<br>
-    그 결을 읽고, 어울리는 사람을 정성껏 골라 드립니다."
-  </p>
-</section>
-
 <section class="pillars">
-  <div class="section-eyebrow">Why BANADA</div>
-  <h2>세 가지 <em>약속</em>이면<br>충분합니다.</h2>
+  <div class="pillars-header fade-up">
+    <div class="eyebrow">Why BANADA</div>
+    <h2>세 가지 <em>약속</em>이면 충분합니다.</h2>
+  </div>
 
-  <div class="pillars-grid">
+  <div class="pillars-grid fade-up">
     <div class="pillar">
       <div class="pillar-num">01 · Discretion</div>
       <h3>완벽한 프라이버시</h3>
-      <p>회원 정보는 담당 매니저 외에는 어디에도 노출되지 않습니다. 조용히, 안전하게. BANADA의 첫 번째 원칙입니다.</p>
+      <p>회원 정보는 담당 매니저 외에는 어디에도 노출되지 않습니다. 조용히, 그리고 철저하게 비밀이 보장되는 안전한 만남입니다.</p>
     </div>
     <div class="pillar">
       <div class="pillar-num">02 · Curation</div>
-      <h3>세대별 맞춤 매칭</h3>
-      <p>20대의 취향과 60대의 결은 다릅니다. 각 세대에 어울리는 회원 풀에서 세심하게 검증된 인연만을 매칭해 드립니다.</p>
+      <h3>선별된 매칭</h3>
+      <p>외모, 커리어, 매너까지 다각도로 검증된 분들만 모셨습니다. 대화가 통하고 결이 맞는 수준 높은 인연을 주선합니다.</p>
     </div>
     <div class="pillar">
       <div class="pillar-num">03 · Concierge</div>
       <h3>전담 매니저 케어</h3>
-      <p>바쁘신 회원님을 위해 만남의 처음부터 끝까지 전담 매니저가 세심하게 조율합니다. 시간을 아껴 드리는 서비스입니다.</p>
+      <p>바쁘신 회원님을 위해 만남의 처음부터 끝까지 전담 매니저가 세심하게 조율합니다. 온전히 만남에만 집중하실 수 있습니다.</p>
     </div>
   </div>
 </section>
 
 <section class="membership" id="membership">
-  <div class="section-eyebrow">Membership</div>
-  <h2 style="text-align:center;margin-left:auto;margin-right:auto;">
-    당신의 무드에 맞는<br>
-    <em>세 가지 초대장.</em>
-  </h2>
-  <p class="membership-sub">
-    가벼운 만남부터 평생의 인연까지. 지금 당신의 삶에 어울리는 결을 선택하실 수 있습니다.
+  <div class="eyebrow">Membership</div>
+  <h2 class="fade-up">당신의 무드에 맞는<br><em>네 가지 초대장.</em></h2>
+  <p class="membership-sub fade-up">
+    가벼운 인연부터 평생의 만남까지. 지금의 당신에게 어울리는 결을 선택해 보세요.
   </p>
 
-  <div class="tiers">
+  <div class="tiers fade-up">
     <div class="tier">
-      <div class="tier-name">Prelude</div>
-      <div class="tier-desc">가볍게, 처음 시작하시는 분께</div>
+      <div class="tier-name">Gold</div>
+      <div class="tier-desc">처음 시작하시는 분께</div>
       <ul>
         <li>월 1회 매칭 큐레이션</li>
         <li>기본 프로필 검증</li>
-        <li>매니저 상담</li>
-      </ul>
-    </div>
-    <div class="tier featured">
-      <div class="tier-name">Signature</div>
-      <div class="tier-desc">가장 많은 회원이 선택하는 결</div>
-      <ul>
-        <li>월 3회 프리미엄 매칭</li>
-        <li>심층 프로필 검증</li>
-        <li>전담 매니저 배정</li>
-        <li>만남 장소 · 시간 조율</li>
+        <li>온라인 매니저 상담</li>
       </ul>
     </div>
     <div class="tier">
-      <div class="tier-name">Noir</div>
-      <div class="tier-desc">평생의 인연을 진지하게 찾으시는 분께</div>
+      <div class="tier-name">VIP</div>
+      <div class="tier-desc">더 넓은 선택지가 필요하신 분께</div>
+      <ul>
+        <li>월 2회 프리미엄 매칭</li>
+        <li>심층 프로필 검증</li>
+        <li>전담 매니저 배정</li>
+      </ul>
+    </div>
+    <div class="tier featured">
+      <div class="tier-name">Platinum</div>
+      <div class="tier-desc">가장 많은 회원이 선택하는 결</div>
+      <ul>
+        <li>월 4회 프리미엄 매칭</li>
+        <li>심층 프로필 검증</li>
+        <li>전담 매니저 1:1 배정</li>
+        <li>만남 장소 및 시간 조율</li>
+      </ul>
+    </div>
+    <div class="tier">
+      <div class="tier-name">Diamond</div>
+      <div class="tier-desc">완벽한 프라이빗 컨시어지</div>
       <ul>
         <li>무제한 맞춤 매칭</li>
-        <li>VIP 전담 매니저 2인</li>
-        <li>비공개 회원 풀 액세스</li>
-        <li>전 과정 컨시어지 케어</li>
+        <li>VIP 전담 수석 매니저 2인</li>
+        <li>비공개 프리미엄 회원 풀 액세스</li>
+        <li>전 과정 풀 컨시어지 케어</li>
       </ul>
     </div>
   </div>
@@ -619,23 +435,28 @@
 
 <section class="consult" id="consult">
   <div class="consult-wrap">
-    <div class="consult-info">
-      <div class="section-eyebrow">Reserve</div>
-      <h2>조용히,<br><em>당신만을 위한 상담.</em></h2>
-      <p class="consult-lead">
-        3분이면 충분합니다.<br>
-        나머지는 저희가 준비하겠습니다.
-      </p>
-      <ul class="consult-details">
-        <li><span class="label">Hours</span><span class="value">평일 11:00 — 21:00</span></li>
-        <li><span class="label">Response</span><span class="value">24시간 이내 회신</span></li>
-        <li><span class="label">Fee</span><span class="value">상담 무료 · 완전 비공개</span></li>
-      </ul>
+    
+    <div class="consult-image-wrap fade-up">
+      <img src="consult.jpg" alt="Concierge Desk" loading="lazy">
+      <div class="consult-info-box">
+        <h3>Private Consultation</h3>
+        <p>매일 12:00 — 24:00 (연중무휴)</p>
+        <p style="color: var(--gold);">상담 무료 · 완전 비공개 진행</p>
+      </div>
     </div>
 
-    <form class="form-card" id="consultForm">
-      <div class="form-title">Private Consultation</div>
-      <p class="form-note-top">아래 정보는 담당 매니저 외에 공유되지 않습니다.</p>
+    <!-- ============================================= -->
+    <!-- 📧 폼 이메일 수신 설정                          -->
+    <!-- 1) https://formspree.io 무료 가입              -->
+    <!-- 2) New Form 만들고 폼 ID 복사                  -->
+    <!-- 3) 아래 action의 YOUR_FORM_ID를 발급받은 걸로 교체 -->
+    <!-- 이렇게 하면 상담 신청이 가입한 이메일로 옵니다      -->
+    <!-- ============================================= -->
+    <form class="form-card fade-up" id="consultForm"
+          action="https://formspree.io/f/YOUR_FORM_ID"
+          method="POST">
+      <div class="form-title">Inquiry</div>
+      <p class="form-note-top">3분이면 충분합니다. 아래 정보는 담당 매니저 외에 절대 공유되지 않습니다.</p>
 
       <div class="form-row">
         <label for="name">Name</label>
@@ -649,7 +470,7 @@
         <label for="age">Age</label>
         <select id="age" name="age" required>
           <option value="">연령대를 선택해 주세요</option>
-          <option value="20s">20대 후반 (25 – 29)</option>
+          <option value="20s">20대</option>
           <option value="30s">30대</option>
           <option value="40s">40대</option>
           <option value="50s">50대</option>
@@ -660,19 +481,30 @@
         <label for="tier">Membership Interest</label>
         <select id="tier" name="tier" required>
           <option value="">관심 있는 멤버십을 선택해 주세요</option>
-          <option value="prelude">Prelude</option>
-          <option value="signature">Signature</option>
-          <option value="noir">Noir</option>
+          <option value="gold">Gold (골드)</option>
+          <option value="vip">VIP</option>
+          <option value="platinum">Platinum (플래티넘)</option>
+          <option value="diamond">Diamond (다이아몬드)</option>
           <option value="undecided">상담 후 결정</option>
         </select>
       </div>
       <div class="form-row">
         <label for="message">Preferences (선택)</label>
-        <textarea id="message" name="message" placeholder="원하시는 결이나 이상형이 있다면 편하게 남겨주세요."></textarea>
+        <textarea id="message" name="message" placeholder="원하시는 결이나 이상형, 혹은 궁금하신 점이 있다면 편하게 남겨주세요."></textarea>
       </div>
+
+      <label class="form-consent">
+        <input type="checkbox" name="consent" required>
+        <span>
+          <a href="privacy.html" target="_blank">개인정보처리방침</a> 및 
+          <a href="terms.html" target="_blank">이용약관</a>에 동의합니다. (필수)
+        </span>
+      </label>
+
       <button type="submit" class="form-submit">Submit Inquiry</button>
-      <p class="form-note">— 개인정보 수집 및 이용에 동의합니다 —</p>
+      <p class="form-note">— 모든 정보는 안전하게 암호화되어 전송됩니다 —</p>
     </form>
+    
   </div>
 </section>
 
@@ -680,30 +512,60 @@
   <img src="logo.png" alt="BANADA">
   <div class="footer-tag">Private Matchmaking, Beautifully Curated.</div>
   <div class="footer-line"></div>
+  <div class="footer-links">
+    <a href="privacy.html">개인정보처리방침</a>
+    <a href="terms.html">이용약관</a>
+    <a href="#consult">문의하기</a>
+  </div>
   <p>© 2026 BANADA · All Rights Reserved</p>
 </footer>
 
 <script>
-  // 상담 신청 폼 처리
+  // 스크롤 시 네비게이션 바 배경 스타일 변경
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (window.scrollY > 50) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  });
+
+  // 스크롤 시 요소 부드럽게 나타나는 애니메이션
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('visible');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // 폼 제출 - Formspree ID를 아직 안 넣었으면 알림창만 뜸
   document.getElementById('consultForm').addEventListener('submit', function(e){
+    const action = this.getAttribute('action');
+    if (action.includes('YOUR_FORM_ID')) {
+      e.preventDefault();
+      alert('⚠️ 이메일 수신 설정이 아직 안 되어 있어요.\n\nformspree.io 가입 후 발급받은 폼 ID를 index.html의 YOUR_FORM_ID 자리에 넣어주세요.\n\n(테스트: 상담 신청이 접수되었다고 가정합니다)');
+      return;
+    }
+    // Formspree 정상 연동 후 아래 코드가 실행됨 (fetch로 페이지 이동 없이 전송)
     e.preventDefault();
-    const data = {
-      name: document.getElementById('name').value,
-      phone: document.getElementById('phone').value,
-      age: document.getElementById('age').value,
-      tier: document.getElementById('tier').value,
-      message: document.getElementById('message').value,
-    };
-    console.log('상담 신청:', data);
-    // TODO: 여기서 백엔드로 전송하거나 이메일 서비스 연동
-    alert('상담 신청이 접수되었습니다. 조용히, 곧 연락드리겠습니다.\n\n실시간 상담을 원하시면 우측 하단 채팅 아이콘을 눌러주세요.');
-    this.reset();
+    const form = this;
+    fetch(action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    }).then(res => {
+      if (res.ok) {
+        alert('상담 신청이 접수되었습니다. 담당 매니저가 조용히 연락드리겠습니다.\n\n실시간 상담은 우측 하단 채팅 아이콘을 눌러주세요.');
+        form.reset();
+      } else {
+        alert('전송 중 문제가 발생했어요. 잠시 후 다시 시도해 주세요.');
+      }
+    }).catch(() => alert('네트워크 오류. 잠시 후 다시 시도해 주세요.'));
   });
 </script>
 
-<!-- ============================================= -->
-<!-- SalesSmartly 채팅 위젯                          -->
-<!-- ============================================= -->
+<!-- SalesSmartly 채팅 위젯 -->
 <script src="https://plugin-code.salesmartly.com/js/project_764753_790092_1782793064.js"></script>
 
 </body>

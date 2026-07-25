@@ -10,6 +10,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Cinzel:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
+    /* ============================================= */
+    /* 🎨 여기서 사이즈 조절 (숫자만 바꾸시면 됩니다)      */
+    /* ============================================= */
+    --logo-nav: 40px;         /* 상단 네비게이션 로고 (기본 40) */
+    --logo-nav-mobile: 32px;  /* 모바일 상단 로고 (기본 32)    */
+    --logo-footer: 60px;      /* 하단 푸터 로고 (기본 60)      */
+
     --bg: #0A0605;
     --bg-2: #140C09;
     --bg-3: #1E120E;
@@ -54,7 +61,7 @@
     border-bottom: 1px solid var(--hairline);
     padding: 12px 48px;
   }
-  .logo-wrap img { height: 40px; width: auto; display: block; filter: drop-shadow(0 2px 10px rgba(0,0,0,0.5)); }
+  .logo-wrap img { height: var(--logo-nav); width: auto; display: block; filter: drop-shadow(0 2px 10px rgba(0,0,0,0.5)); }
   .nav-links { display: flex; gap: 32px; align-items: center; }
   .nav-links a {
     color: var(--cream-dim); text-decoration: none;
@@ -261,7 +268,7 @@
   .form-note { font-size: 12px; color: var(--cream-dim); text-align: center; margin-top: 20px; letter-spacing: 0.05em; }
 
   footer { background: var(--bg-3); padding: 80px 48px 40px; text-align: center; border-top: 1px solid var(--hairline); }
-  footer img { height: 60px; margin-bottom: 24px; opacity: 0.9; }
+  footer img { height: var(--logo-footer); margin-bottom: 24px; opacity: 0.9; }
   .footer-tag { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 18px; color: var(--cream-dim); margin-bottom: 32px; }
   .footer-line { width: 80px; height: 1px; background: var(--gold-dim); margin: 0 auto 24px; }
   .footer-links { display: flex; justify-content: center; gap: 32px; margin-bottom: 24px; flex-wrap: wrap; }
@@ -279,7 +286,7 @@
   @media(max-width: 900px){
     nav { padding: 16px 24px; }
     nav.scrolled { padding: 12px 24px; }
-    .logo-wrap img { height: 32px; }
+    .logo-wrap img { height: var(--logo-nav-mobile); }
     .nav-links { gap: 16px; }
     .nav-links a:not(.nav-cta) { display: none; }
     

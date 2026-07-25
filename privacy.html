@@ -9,6 +9,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Cinzel:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
+    /* 🎨 로고 사이즈 조절 */
+    --logo-nav: 36px;         /* 상단 네비 로고 (기본 36) */
+
     --bg: #0A0605;
     --bg-2: #140C09;
     --bg-3: #1E120E;
@@ -35,7 +38,7 @@
     background: rgba(10,6,5,0.9); backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--hairline);
   }
-  nav img { height: 36px; }
+  nav img { height: var(--logo-nav); }
   nav a {
     color: var(--cream-dim); text-decoration: none;
     font-family: 'Cinzel', serif; font-size: 12px;

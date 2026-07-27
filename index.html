@@ -3,16 +3,19 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>BANADA — 퍼스널 브랜딩 · 이미지 코칭 · 마인드셋 컨설팅</title>
-<meta name="description" content="자기계발, 이미지 컨설팅, 커뮤니케이션 코칭 프로그램. 나만의 매력을 다듬는 1:1 퍼스널 브랜딩 서비스.">
+<title>BANADA — 당신에게 어울리는 인연</title>
+<meta name="description" content="소수의 남성 회원만을 위한 프라이빗 매칭 서비스. 정성껏 큐레이션된 인연을 조용하고 확실하게 연결해 드립니다.">
 <link rel="icon" type="image/png" href="logo.png">
 <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Cinzel:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --logo-nav: 80px;
-    --logo-nav-mobile: 64px;
-    --logo-footer: 120px;
+    /* ============================================= */
+    /* 🎨 여기서 사이즈 조절 (숫자만 바꾸시면 됩니다)      */
+    /* ============================================= */
+    --logo-nav: 80px;         /* 상단 네비게이션 로고 (기본 40) */
+    --logo-nav-mobile: 64px;  /* 모바일 상단 로고 (기본 32)    */
+    --logo-footer: 120px;      /* 하단 푸터 로고 (기본 60)      */
 
     --bg: #0A0605;
     --bg-2: #140C09;
@@ -81,7 +84,8 @@
     display: flex; flex-direction: column; justify-content: center; align-items: center;
     text-align: center; padding: 140px 24px 100px;
   }
-
+  
+  /* 📷 hero.jpg 파일을 index.html 옆에 두시면 됩니다 */
   .hero-bg {
     position: absolute; inset: 0; z-index: 0;
     background-image: url('hero.png');
@@ -101,7 +105,7 @@
     margin-bottom: 24px; text-transform: uppercase;
   }
   .eyebrow::before, .eyebrow::after { content: ''; width: 32px; height: 1px; background: var(--gold-dim); }
-
+  
   h1 {
     font-family: 'Cormorant Garamond', serif;
     font-size: clamp(42px, 6vw, 92px); font-weight: 300;
@@ -115,7 +119,7 @@
   }
   .hero-sub {
     font-size: 17px; color: var(--cream-dim); font-weight: 300;
-    max-width: 560px; margin: 0 auto 48px; line-height: 1.7; word-break: keep-all;
+    max-width: 540px; margin: 0 auto 48px; line-height: 1.7; word-break: keep-all;
   }
 
   .btn-primary {
@@ -130,12 +134,14 @@
   .fade-up { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
   .fade-up.visible { opacity: 1; transform: translateY(0); }
 
+  section { }
   .philosophy { padding: 100px 48px; background: var(--bg); }
   .phil-container {
     max-width: 1200px; margin: 0 auto;
     display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
   }
-
+  
+  /* 📷 philosophy.jpg 파일을 index.html 옆에 두시면 됩니다 */
   .phil-image {
     position: relative; width: 100%; aspect-ratio: 3/4; overflow: hidden;
     background: var(--bg-3);
@@ -163,8 +169,7 @@
   .pillars { padding: 0 48px 100px; background: var(--bg); max-width: 1200px; margin: 0 auto; }
   .pillars-header { text-align: center; margin-bottom: 60px; }
   .pillars-header h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px, 4vw, 56px); margin: 20px 0 0; }
-  .pillars-header h2 em { font-style: italic; color: var(--gold-bright); }
-
+  
   .pillars-grid {
     display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
     background: var(--hairline); border: 1px solid var(--hairline);
@@ -178,18 +183,14 @@
   .pillar h3 { font-family: 'Cormorant Garamond', serif; font-size: 30px; font-weight: 500; color: var(--gold-bright); margin-bottom: 16px; }
   .pillar p { font-size: 15px; color: var(--cream-dim); line-height: 1.7; word-break: keep-all; }
 
-  .programs { padding: 100px 48px; background: linear-gradient(180deg, var(--bg-2), var(--bg)); text-align: center; }
-  .programs h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px, 4vw, 56px); margin: 20px auto 20px; }
-  .programs h2 em { font-style: italic; color: var(--gold-bright); }
-  .programs-sub {
-    font-size: 15px; color: var(--cream-dim); max-width: 620px;
-    margin: 0 auto 60px; line-height: 1.7; word-break: keep-all;
-  }
+  .membership { padding: 100px 48px; background: linear-gradient(180deg, var(--bg-2), var(--bg)); text-align: center; }
+  .membership h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px, 4vw, 56px); margin: 20px auto 60px; }
 
-  .tiers { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; max-width: 1100px; margin: 0 auto; }
+  /* 4단계 멤버십 그리드 — 이름만 강조 */
+  .tiers { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; max-width: 1000px; margin: 0 auto; }
   .tier {
     background: var(--bg); border: 1px solid var(--hairline);
-    padding: 40px 24px; text-align: center; position: relative; transition: all .4s;
+    padding: 48px 24px; text-align: center; position: relative; transition: all .4s;
   }
   .tier:hover { border-color: var(--gold); transform: translateY(-6px); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
   .tier.featured { background: linear-gradient(180deg, var(--bg-3), var(--bg)); border-color: var(--gold); }
@@ -198,20 +199,17 @@
     color: var(--gold-bright); font-size: 14px;
   }
   .tier-name {
-    font-family: 'Cormorant Garamond', serif; font-size: 30px; font-weight: 500;
-    color: var(--gold-bright); letter-spacing: 0.02em; margin-bottom: 8px;
-  }
-  .tier-desc {
-    font-size: 12px; color: var(--cream-dim);
-    letter-spacing: 0.05em; font-weight: 300;
+    font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 500;
+    color: var(--gold-bright); letter-spacing: 0.02em;
   }
 
-  .programs-hint {
+  .membership-hint {
     font-size: 14px; color: var(--cream-dim);
     margin: 48px auto 0; max-width: 500px;
     font-style: italic;
   }
 
+  /* Consult CTA — big chat CTA instead of form */
   .consult { padding: 100px 48px; background: var(--bg); text-align: center; }
   .consult-cta { max-width: 720px; margin: 0 auto; }
   .consult-cta h2 {
@@ -263,22 +261,7 @@
     text-transform: uppercase; margin-top: 24px;
   }
 
-  /* 서비스 안내 명시 (법적 명확성) */
-  .disclosure {
-    padding: 40px 48px; background: var(--bg-3);
-    text-align: center;
-    border-top: 1px solid var(--hairline);
-    border-bottom: 1px solid var(--hairline);
-  }
-  .disclosure p {
-    font-size: 13px; color: var(--cream-dim);
-    max-width: 720px; margin: 0 auto;
-    line-height: 1.7; word-break: keep-all;
-  }
-  .disclosure strong {
-    color: var(--gold-bright); font-weight: 500;
-  }
-
+  /* 📱 모바일 하단 플로팅 CTA 배너 */
   .mobile-cta {
     display: none;
     position: fixed; bottom: 0; left: 0; right: 0; z-index: 90;
@@ -321,24 +304,23 @@
     .logo-wrap img { height: var(--logo-nav-mobile); }
     .nav-links { gap: 16px; }
     .nav-links a:not(.nav-cta) { display: none; }
-
+    
     .hero { padding: 140px 24px 80px; }
     h1 { font-size: 42px; }
     .hero-sub { font-size: 15px; }
     .btn-primary { width: 100%; justify-content: center; }
 
-    .philosophy, .pillars, .programs, .consult { padding: 60px 24px; }
-    .disclosure { padding: 32px 24px; }
-
+    .philosophy, .pillars, .membership, .consult { padding: 60px 24px; }
+    
     .phil-container { grid-template-columns: 1fr; gap: 32px; }
     .phil-image { order: -1; aspect-ratio: 4/3; }
-
+    
     .pillars-grid { grid-template-columns: 1fr; }
     .pillar { border-bottom: 1px solid var(--hairline); padding: 32px 24px; }
-
+    
     .tiers { grid-template-columns: repeat(2, 1fr); gap: 12px; max-width: 400px; }
-    .tier { padding: 28px 16px; }
-    .tier-name { font-size: 24px; }
+    .tier { padding: 32px 16px; }
+    .tier-name { font-size: 26px; }
 
     .btn-cta-large { padding: 20px 32px; font-size: 12px; }
     .consult-perks { gap: 24px; }
@@ -356,7 +338,7 @@
   </div>
   <div class="nav-links">
     <a href="#philosophy">Philosophy</a>
-    <a href="#programs">Programs</a>
+    <a href="#membership">Membership</a>
     <a href="#" onclick="openChat(event)" class="nav-cta">Start Chat</a>
   </div>
 </nav>
@@ -366,16 +348,15 @@
   <div class="hero-overlay"></div>
 
   <div class="hero-inner fade-up">
-    <div class="eyebrow">Private Personal Branding · Est. 2026</div>
+    <div class="eyebrow">Private Matchmaking · Est. 2026</div>
     <h1>
-      좋은 관계는,<br>
-      <em>준비된 사람이</em><br>
-      만들어갑니다.
+      아무나 만나기엔<br>
+      당신의 <em>시간이</em><br>
+      너무 귀합니다.
     </h1>
     <p class="hero-sub">
-      자기 이해와 매력 향상을 위한 시간.<br>
-      BANADA는 자기계발과 관계 심리 코칭을 위한<br>
-      1:1 코칭 프로그램을 제공합니다.
+      정성껏 큐레이션된 인연을,<br>
+      조용하고 확실하게 연결해 드립니다.
     </p>
     <div style="margin-top: 40px;">
       <a href="#" class="btn-primary" onclick="openChat(event)">Start Consultation</a>
@@ -387,18 +368,13 @@
   <div class="phil-container">
     <div class="phil-text fade-up">
       <div class="eyebrow" style="margin-bottom: 16px;">Our Philosophy</div>
-      <h2>관계는 만나는 것이 아니라,<br><em>만들어가는 것입니다.</em></h2>
+      <h2>좋은 만남은<br><em>우연이 아니라 안목입니다.</em></h2>
       <p class="phil-quote">
-        지금까지의 관계가 원하는 방향으로 흐르지 않았다면,
-        그건 상대방의 문제가 아닐지도 모릅니다.
-      </p>
-      <p class="phil-quote">
-        나를 더 잘 이해하고, 매력을 다듬고,
-        관계의 흐름을 읽는 힘을 기르는 것.
-        BANADA는 그 준비를 함께합니다.
+        한 분 한 분의 취향과 삶의 온도를 읽어
+        가장 잘 어울리는 인연을 정성껏 찾아드립니다.
       </p>
     </div>
-
+    
     <div class="phil-image fade-up">
       <img src="philosophy.png" alt="Atmosphere" loading="lazy">
     </div>
@@ -408,63 +384,47 @@
 <section class="pillars">
   <div class="pillars-header fade-up">
     <div class="eyebrow">Why BANADA</div>
-    <h2>세 가지 <em>준비</em>가 만듭니다.</h2>
+    <h2>세 가지 <em>약속</em>이면 충분합니다.</h2>
   </div>
 
   <div class="pillars-grid fade-up">
     <div class="pillar">
-      <div class="pillar-num">01 · Self-Awareness</div>
-      <h3>자기 이해 코칭</h3>
-      <p>성격 진단, 관계 패턴 분석. 원하는 인연에 앞서 나를 먼저 이해합니다.</p>
+      <div class="pillar-num">01 · Discretion</div>
+      <h3>완벽한 프라이버시</h3>
+      <p>담당 매니저 외 어디에도 노출되지 않습니다.</p>
     </div>
     <div class="pillar">
-      <div class="pillar-num">02 · Image & Manner</div>
-      <h3>이미지 개선 코칭</h3>
-      <p>스타일, 대화법, 매너 개선까지. 첫인상부터 관계 유지까지 세심하게 다듬습니다.</p>
+      <div class="pillar-num">02 · Curation</div>
+      <h3>선별된 매칭</h3>
+      <p>다각도로 검증된 인연만을 주선합니다.</p>
     </div>
     <div class="pillar">
-      <div class="pillar-num">03 · Relationship</div>
-      <h3>심리 상담 컨설팅</h3>
-      <p>관계 심리, 커뮤니케이션, 갈등 해결. 지속 가능한 관계를 위한 통찰을 나눕니다.</p>
+      <div class="pillar-num">03 · Concierge</div>
+      <h3>전담 매니저 케어</h3>
+      <p>처음부터 끝까지 세심하게 조율해 드립니다.</p>
     </div>
   </div>
 </section>
 
-<section class="programs" id="programs">
-  <div class="eyebrow">Programs</div>
-  <h2 class="fade-up">당신의 목표에 맞는<br><em>네 가지 프로그램.</em></h2>
-  <p class="programs-sub fade-up">
-    1회 진단 세션부터 종합 코칭까지.
-    현재 당신에게 필요한 컨설팅을 선택하실 수 있습니다.
-  </p>
+<section class="membership" id="membership">
+  <div class="eyebrow">Membership</div>
+  <h2 class="fade-up">당신의 무드에 맞는<br><em>네 가지 초대장.</em></h2>
 
   <div class="tiers fade-up">
-    <div class="tier">
-      <div class="tier-name">Basic</div>
-      <div class="tier-desc">1회 진단 상담</div>
-    </div>
-    <div class="tier">
-      <div class="tier-name">Standard</div>
-      <div class="tier-desc">이미지 코칭 프로그램</div>
-    </div>
-    <div class="tier featured">
-      <div class="tier-name">Premium</div>
-      <div class="tier-desc">종합 코칭 프로그램</div>
-    </div>
-    <div class="tier">
-      <div class="tier-name">Signature</div>
-      <div class="tier-desc">1:1 전달 코칭</div>
-    </div>
+    <div class="tier"><div class="tier-name">Gold</div></div>
+    <div class="tier"><div class="tier-name">VIP</div></div>
+    <div class="tier featured"><div class="tier-name">Platinum</div></div>
+    <div class="tier"><div class="tier-name">Diamond</div></div>
   </div>
 
-  <p class="programs-hint fade-up">각 프로그램의 자세한 안내는 채팅 상담을 통해 드립니다.</p>
+  <p class="membership-hint fade-up">각 멤버십의 자세한 안내는 채팅 상담을 통해 드립니다.</p>
 </section>
 
 <section class="consult" id="consult">
   <div class="consult-cta fade-up">
-    <div class="eyebrow" style="justify-content: center;">Free Consultation</div>
+    <div class="eyebrow" style="justify-content: center;">Private Consultation</div>
     <h2>
-      지금 코치와<br>
+      지금 매니저와<br>
       <em>대화를 시작하세요.</em>
     </h2>
     <p class="consult-lead">
@@ -474,7 +434,7 @@
 
     <a href="#" class="btn-cta-large" onclick="openChat(event)">
       <span class="chat-icon">💬</span>
-      <span>코치와 채팅 시작하기</span>
+      <span>매니저와 채팅 시작하기</span>
     </a>
 
     <div class="consult-perks">
@@ -485,7 +445,7 @@
       <div class="perk-divider"></div>
       <div class="perk">
         <div class="perk-num">FREE</div>
-        <div class="perk-label">첫 상담 무료</div>
+        <div class="perk-label">상담 무료</div>
       </div>
       <div class="perk-divider"></div>
       <div class="perk">
@@ -498,16 +458,9 @@
   </div>
 </section>
 
-<!-- 서비스 안내: 컨설팅이지 매칭 서비스 아님 명시 (법적 명확성 + 심의 통과 도움) -->
-<section class="disclosure">
-  <p>
-    <strong>서비스 안내</strong> — BANADA는 자신만의 매력을 완성하고, 나에게 어울리는 이상적인 환경과 어울림을 제안받는 1:1 커뮤니케이션 큐레이션 서비스입니다.
-  </p>
-</section>
-
 <footer>
   <img src="logo.png" alt="BANADA">
-  <div class="footer-tag">Self-Development Coaching Programs.</div>
+  <div class="footer-tag">Private Matchmaking, Beautifully Curated.</div>
   <div class="footer-line"></div>
   <div class="footer-links">
     <a href="privacy.html">개인정보처리방침</a>
@@ -518,12 +471,14 @@
 </footer>
 
 <script>
+  // 스크롤 시 네비게이션 바 배경 스타일 변경
   window.addEventListener('scroll', () => {
     const nav = document.getElementById('navbar');
     if (window.scrollY > 50) nav.classList.add('scrolled');
     else nav.classList.remove('scrolled');
   });
 
+  // 스크롤 시 요소 부드럽게 나타나는 애니메이션
   const observer = new IntersectionObserver((entries, obs) => {
     entries.forEach(entry => {
       if(entry.isIntersecting){
@@ -534,6 +489,7 @@
   }, { threshold: 0.15 });
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
+  // 채팅 열기 - 모든 CTA 버튼에서 호출
   function openChat(e) {
     if (e) e.preventDefault();
     if (window.ssq) {
@@ -544,9 +500,10 @@
   }
 </script>
 
+<!-- 📱 모바일 하단 플로팅 채팅 배너 -->
 <div class="mobile-cta">
   <a href="#" onclick="openChat(event)">
-    💬 컨설턴트와 채팅 시작하기
+    💬 매니저와 채팅 시작하기
   </a>
 </div>
 
